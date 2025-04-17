@@ -69,7 +69,9 @@ int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
                     }
                     if (cand<min_d[j]){  // but if lower distance
                         min_d[j]=cand;   // then we have a new lowest distance
-                        BPQNode adj_n{adj,cand,adj};  // make a BPQNode for this adjacent node
+                        BPQNode adj_n;   // make a BPQNode for this adjacent node
+						adj_n.gnode=adj;
+						adj_n.pri=cand;
                         if (bet.Contains(adj_n)){ // update the node in the priority queue if it exists
                             bet.Update(adj_n);
                         } 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <set>
 #include <climits>
+#include <vector>
 
 
 using namespace std;
@@ -23,6 +24,10 @@ struct GraphEdge {
 	nodekey_t from;
 	nodekey_t to;
 	unsigned int weight;
+};
+
+struct GraphNode {
+	nodekey_t node;
 };
 
 
@@ -50,16 +55,18 @@ class Graph{
 		// These are sets since the order shouldn't matter (theoretically, a graph has no order)
 		set<const GraphEdge*> GetOutwardEdgesFrom(nodekey_t nodeKey) const; // get pointers to the edges that go out from the given node
 		set<nodekey_t> GetNodes() const; // gets all the nodes in the graph
+		vector<nodekey_t> GetNodesasVec() const;
 		// set<const GraphEdge*> GetEdges() const; // gets all edges in the graph (), you may add this it is ungraded
 
 		size_t Size() const; // num edges
 		size_t Order() const; // num nodes
-	
+
 	
 	private:
-		// TODO:
-		// put your code here!
-	
+		vector<vector<GraphEdge*>> adjList;  // adjacency list that stores edge pointers
+		set<nodekey_t> nodes;  // set that stores unique node keys
+		vector<nodekey_t> nodes_v;  // vector that stores node keys for indexing
+
 };
 
 #endif

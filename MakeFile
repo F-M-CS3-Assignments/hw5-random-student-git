@@ -1,0 +1,17 @@
+all:
+	g++ -Wall -g Graph.cpp GraphTests.cpp -o graph-tests
+	g++ -Wall -g Graph.cpp BetterPriorityQueue.cpp BPQTests.cpp -o bpq-tests
+	g++ -Wall -g Graph.cpp BetterPriorityQueue.cpp DijkstraTests.cpp -o dijkstra 
+ 
+rungraphtests:
+	./graph-tests
+runbpqtests:
+	./bpq-tests
+
+rundijkstra:
+	./dijkstra
+
+check:
+	valgrind --leak-check=yes ./graph-tests
+	valgrind --leak-check=yes ./bpq-tests
+	valgrind --leak-check=yes ./dijkstra

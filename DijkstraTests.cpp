@@ -1,4 +1,3 @@
-
 #include "Graph.h"
 #include "BetterPriorityQueue.h"
 #include "Dijkstra.h"
@@ -69,8 +68,27 @@ int DijkstraTest(){
 
 void MoreDijkstraTests(){
 	cout << "Deep Testing Dijkstra Algorithm..." << endl;
+	
+	Graph *g2 = new Graph();   //  testing for no available path
+    g2->AddNode(1);
+    g2->AddNode(2);
+	int ans2 = dijkstra(1,2,g2);
+    assert(ans2 == -1);
+	cout << "PASSED" << endl;
+	delete g2;
 
-	// Your code goes here!
+	Graph *g3 = new Graph();    //  testing for multiple edges
+	g3->AddNode(1);
+    g3->AddNode(2);
+    g3->AddEdge(1,2,10);
+	try{
+        g3->AddEdge(1,2,69);
+        assert(false);
+    } catch (const invalid_argument& e){
+        cout << "PASSED" << endl;
+    }	
+	delete g3;
+
 
 	cout << "DONE Deep Testing Dijkstra Algorithm" << endl;
 }

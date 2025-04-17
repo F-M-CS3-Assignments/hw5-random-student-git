@@ -78,9 +78,11 @@ void TestAddEdge(){
 		assert(false);
 	} catch (const invalid_argument& e) {}
 
+	try {
+		g.AddEdge(420, 80085, 777);   // non existent nodes
+		assert(false);
+	} catch (const invalid_argument& e) {}
 
-	// more tests go here!
-	
 	cout << "PASSED!" << endl << endl;
 }
 
@@ -89,6 +91,16 @@ void TestIsPresentSizeAndOrder() {
 	cout << "Testing IsPresent, Size, and Order..." << endl;
 	
 	// more tests go here!
+
+	Graph g0;  // standard testing
+	g0.AddNode(1);
+	g0.AddNode(2);
+	g0.AddEdge(1, 2, 3);
+	assert(g0.IsPresent(1) == true);
+	assert(g0.IsPresent(2) == true);
+	assert(g0.IsPresent(3) == false);
+	assert(g0.Size() == 1);
+	assert(g0.Order() == 2);
 
 	Graph g2 = Graph();
 	assert(g2.Size() == 0);
@@ -123,8 +135,15 @@ void TestGetOutwardEdgesFrom(){
 	assert(result == soln);
 
 
-	// more tests go here!
+	set<const GraphEdge*> rule = g.GetOutwardEdgesFrom(34);  // node 34 has no outward edges
+	assert(rule.empty());
 	
+	try {
+		g.GetOutwardEdgesFrom(80085);    // non existent node
+		assert(false);
+	} catch (const invalid_argument& e) {
+		cout << "PASSED" << endl;
+	}
 	
 	cout << "PASSED!" << endl << endl;
 }
